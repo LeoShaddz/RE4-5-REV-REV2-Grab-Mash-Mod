@@ -1,51 +1,40 @@
-name: Build
+name: Build GrabMash ASIs
 
 on:
   push:
-  pull_request:
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Configurar MSVC (x86 / 32 bits)
-        uses: ilammy/msvc-dev-cmd@v1
+      - uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: x86
 
-      - name: Compilar RE4_GrabMash
-        shell: cmd
+      - name: Compile RE4, RE5, RERev and RERev2 GrabMash
+        shell: pwsh
         run: |
-          mkdir out\RE4
-          cl /nologo /LD /O2 /MT /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /DWIN32_LEAN_AND_MEAN RE4_GrabMash.cpp /Fe:out\RE4\RE4_GrabMash.asi /Fo:out\RE4\ user32.lib kernel32.lib
-          copy RE4_GrabMash.ini out\RE4\
+          foreach ($name in @("RE4_GrabMash", "RE5_GrabMash", "RERev_GrabMash", "RERev2_GrabMash")) {
+            $src = Get-ChildItem -Recurse -Filter "$name.cpp" | Select-Object -First 1
+            if (-not $src) { throw "$name.cpp nao encontrado" }
+            Push-Location $src.DirectoryName
+            cl /nologo /LD /O2 /MT /EHsc /D_CRT_SECURE_NO_WARNINGS "$name.cpp" "/Fe:$name.asi" /link user32.lib kernel32.lib
+            if ($LASTEXITCODE -ne 0) { throw "Falha na compilacao: $name" }
+            Pop-Location
+          }
 
-      - name: Compilar RE5_GrabMash
-        shell: cmd
-        run: |
-          mkdir out\RE5
-          cl /nologo /LD /O2 /MT /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /DWIN32_LEAN_AND_MEAN RE5_GrabMash.cpp /Fe:out\RE5\RE5_GrabMash.asi /Fo:out\RE5\ user32.lib kernel32.lib winmm.lib
-          copy RE5_GrabMash.ini out\RE5\
-
-      - name: Verificar que são 32 bits
-        shell: cmd
-        run: |
-          dumpbin /headers out\RE4\RE4_GrabMash.asi | findstr /C:"machine"
-          dumpbin /headers out\RE5\RE5_GrabMash.asi | findstr /C:"machine"
-
-      - name: Enviar RE4_GrabMash
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: RE4_GrabMash
-          path: out/RE4/*
-
-      - name: Enviar RE5_GrabMash
-        uses: actions/upload-artifact@v4
-        with:
-          name: RE5_GrabMash
-          path: out/RE5/*
+          name: GrabMash
+          path: |
+            **/RE4_GrabMash.asi
+            **/RE5_GrabMash.asi
+            **/RERev_GrabMash.asi
+            **/RERev2_GrabMash.asi
+            **/RE4_GrabMash.ini
+            **/RE5_GrabMash.ini
+            **/RERev_GrabMash.ini
+            **/RERev2_GrabMash.ini
