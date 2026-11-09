@@ -1,4 +1,4 @@
-# Resident Evil 4 (2005) / Resident Evil 5 / Resident Evil Revelations / Resident Evil Revelations 2 Grab Mash Mod
+# Resident Evil 4 (2005) / 5 / Revelations / Revelations 2 Grab Mash Mod
 
 This quality-of-life mod allows you to break free simply from a enemy grab by holding the action key on your keyboard or the 'A' button on your controller. The keyboard key is customizable.
 
