@@ -1,10 +1,12 @@
-# Resident Evil 4 (2005) / Resident Evil 5 Grab Smash Mod
+# Resident Evil 4 (2005) / Resident Evil 5 / Resident Evil Revelations / Resident Evil Revelations 2 Grab Smash Mod
 
 This quality-of-life mod allows you to break free simply from a enemy grab by holding the action key on your keyboard or the 'A' button on your controller. The keyboard key is customizable.
 
 The glyph still shows a prompt to move the analog stick on controller or move the mouse on keyboard, but the mod works.
 
 RE4 action key on keyboard is "E" key and in RE5 is "F" key.
+
+In RE5, it also works for turning valves, in REV and REV2, this has not yet been implemented.
 
 # AI disclosure
 The code of this mod was written by Claude Sonnet 5.5 and tested in-game by me.
