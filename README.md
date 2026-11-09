@@ -12,11 +12,11 @@ In RE5, it also works for turning valves, in REV and REV2, this has not yet been
 
 **RE4**: 
 
-Install the Ultimate Asi Loader in this directory: Resident Evil 4\Bin32\
-Extract the file "RE4.2005.Grab.Mash.v1.0.zip"
-Copy the .asi and .ini files into the "scripts" folder, which is located in this directory: Resident Evil 4\Bin32\
-Done
-To work in RE4 with the HD Project/RE4 tweaks mod installed, you need to rename the dinput8.dll file from the Ultimate Asi Loader to d3d9.dll
+1. Install the Ultimate Asi Loader in this directory: Resident Evil 4\Bin32\
+2. Extract the file "RE4.2005.Grab.Mash.v1.0.zip"
+3. Copy the .asi and .ini files into the "scripts" folder, which is located in this directory: Resident Evil 4\Bin32\
+4. Done
+5. To work in RE4 with the HD Project/RE4 tweaks mod installed, you need to rename the dinput8.dll file from the Ultimate Asi Loader to d3d9.dll
 
 **RE5**: 
 
